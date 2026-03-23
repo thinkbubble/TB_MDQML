@@ -131,3 +131,38 @@
    ```bash
    git push origin main
    ```
+
+## 8. Starting files, more info
+
+1. testing.py 
+    - Begins and orchestrates the pipeline
+    - Put your raw data for one dataset in raw_data folder and try running.
+    - Familiarize yourself with the flow of data and understand the system.
+    - The system isn't perfect, but it's a good starting point to ingesting data. You can find flaws and report.
+    - Start coding here - Expand into new territory.
+
+2. preprocess_data.py
+    - Reads data from internal system (FUTURE)
+    - Reads input data from external source stored in raw_data folder
+    - Preprocesses this data and saves it in a normalized format (.npz)
+    - Saves these vectors to cleaned_data folder
+    - Gathers metadata about the external data stored in raw_data
+    - Saves this metadata in database (csv for now)
+    - Returns a mapping of the external data and a unique id for the database entry.
+
+3. load_data.py
+    - Use this for loading data after you have already preprocessed it, this will be faster
+    and save time in subsequent iterations.
+
+
+## 9. Future steps - Expand into this
+
+1. Feature Engineering / Representation
+2. Train / Validation / Test Split
+3. Model Selection 
+   - Use multiple model types for each goal and dataset - must compare
+4. Training 
+5. Evaluation (Metrics) 
+   - Log all results - needs to be automated
+6. Iteration / Tuning
+7. Deployment / Inference
