@@ -371,7 +371,7 @@ def gather_internal_data():
 # Could add a sensor layer later that gathers data into a file
 # and drops these files in raw_data folder
 # Could make this a loop that continually checks that folder for new data
-def gather_external_data(folder_name="./raw_data"):
+def gather_external_data(folder_name="./raw_data", cleaned_data_folder_path="./cleaned_data"):
 
     number_of_files, file_types, total_file_size_in_bytes, total_rows, total_columns = gather_folder_statistics(folder_name)
 
@@ -385,12 +385,12 @@ def gather_external_data(folder_name="./raw_data"):
 
     try:
 
-        txt_data = preprocess_txt_files_in_folder(folder_name)
-        csv_data = preprocess_csv_files_in_folder(folder_name)
-        image_data = preprocess_image_data_in_folder(folder_name)
-        video_data = preprocess_video_data_in_folder(folder_name)
-        audio_data = preprocess_audio_data_in_folder(folder_name)
-        signal_data = preprocess_signal_data_in_folder(folder_name)
+        txt_data = preprocess_txt_files_in_folder(folder_name, cleaned_data_folder_path)
+        csv_data = preprocess_csv_files_in_folder(folder_name, cleaned_data_folder_path)
+        image_data = preprocess_image_data_in_folder(folder_name, cleaned_data_folder_path)
+        video_data = preprocess_video_data_in_folder(folder_name, cleaned_data_folder_path)
+        audio_data = preprocess_audio_data_in_folder(folder_name, cleaned_data_folder_path)
+        signal_data = preprocess_signal_data_in_folder(folder_name, cleaned_data_folder_path)
 
         print("\n=== Preprocessing Results ===")
         print("TXT Data:\n", txt_data, "\n")
@@ -422,7 +422,7 @@ def gather_external_data(folder_name="./raw_data"):
     return number_of_files, file_types, total_file_size_in_bytes, total_rows, total_columns, master_external_data
     #return txt_data, csv_data, image_data, video_data, audio_data, signal_data, goal[2], 'all_clear'
 
-def log_first_checkpoint(number_of_files, file_types, total_file_size_in_bytes, total_rows, total_columns):
+def log_first_checkpoint(number_of_files, file_types, total_file_size_in_bytes, total_rows, total_columns, log_file_path='job_data.csv'):
 
     unique_id = generate_unique_id(10)
     time_stamp = get_current_timestamp_new_york()
@@ -433,7 +433,7 @@ def log_first_checkpoint(number_of_files, file_types, total_file_size_in_bytes, 
         file_types_dict = file_types
 
     # Database Swap Later
-    append_this_job_data_to_csv(unique_id, number_of_files, file_types[1], total_file_size_in_bytes, total_rows, total_columns, file_path='job_data.csv')
+    append_this_job_data_to_csv(unique_id, number_of_files, file_types[1], total_file_size_in_bytes, total_rows, total_columns, file_path=log_file_path)
     #append_this_job_data_to_csv(unique_id, number_of_files, file_types[1], total_file_size_in_bytes, total_rows, total_columns, file_path='job_data.csv')
     # Start base entry
     first_checkpoint_entry = {
@@ -467,12 +467,12 @@ def log_first_checkpoint(number_of_files, file_types, total_file_size_in_bytes, 
     return unique_id
 
 
-def sensing_and_signal_ingestion():
+def sensing_and_signal_ingestion(raw_data_folder_path, cleaned_data_folder_path, checkpoint_file_path):
 
     internal_data = gather_internal_data()
-    number_of_files, file_types, total_file_size_in_bytes, total_rows, total_columns, external_data_mapping = gather_external_data('./raw_data')
+    number_of_files, file_types, total_file_size_in_bytes, total_rows, total_columns, external_data_mapping = gather_external_data(raw_data_folder_path, cleaned_data_folder_path)
     
-    MASTER_UNIQUE_ID = log_first_checkpoint(number_of_files, file_types, total_file_size_in_bytes, total_rows, total_columns)
+    MASTER_UNIQUE_ID = log_first_checkpoint(number_of_files, file_types, total_file_size_in_bytes, total_rows, total_columns, checkpoint_file_path)
 
     return MASTER_UNIQUE_ID, external_data_mapping, internal_data
 

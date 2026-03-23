@@ -1,0 +1,97 @@
+{
+    "f1_score": {
+        "minimum": 0,
+        "maximum": 1,
+        "which_is_better": "maximum"
+    },
+    "accuracy": {
+        "minimum": 0,
+        "maximum": 1,
+        "which_is_better": "maximum"
+    },
+    "roc_auc": {
+        "minimum": 0,
+        "maximum": 1,
+        "which_is_better": "maximum"
+    },
+    "precision": {
+        "minimum": 0,
+        "maximum": 1,
+        "which_is_better": "maximum"
+    },
+    "validation_loss": {
+        "minimum": 0,
+        "maximum": 1000000,
+        "which_is_better": "minimum"
+    },
+    "silhouette_score": {
+        "minimum": -1,
+        "maximum": 1,
+        "which_is_better": "maximum"
+    },
+    "adjusted_rand_index": {
+        "minimum": -1,
+        "maximum": 1,
+        "which_is_better": "maximum"
+    },
+    "mean_absolute_error": {
+        "minimum": 0,
+        "maximum": 1000000,
+        "which_is_better": "minimum"
+    },
+    "recall": {
+        "minimum": 0,
+        "maximum": 1,
+        "which_is_better": "maximum"
+    },
+    "loss": {
+        "minimum": 0,
+        "maximum": 1000000,
+        "which_is_better": "minimum"
+    },
+    "mean_iou": {
+        "minimum": 0,
+        "maximum": 1,
+        "which_is_better": "maximum"
+    },
+    "embedding_variance": {
+        "minimum": 0,
+        "maximum": 1000000,
+        "which_is_better": "stable_above_zero"
+    },
+    "discriminator_loss": {
+        "minimum": 0,
+        "maximum": 1000000,
+        "which_is_better": "stable_above_zero"
+    },
+    "mean_squared_error": {
+        "minimum": 0,
+        "maximum": 1000000,
+        "which_is_better": "minimum"
+    },
+    "generator_loss": {
+        "minimum": 0,
+        "maximum": 1000000,
+        "which_is_better": "minimum"
+    },
+    "mean_mse": {
+        "minimum": 0,
+        "maximum": 1000000,
+        "which_is_better": "minimum"
+    },
+    "discriminator_accuracy": {
+        "minimum": 0,
+        "maximum": 1,
+        "which_is_better": "midpoint"
+    },
+    "r2_score": {
+        "minimum": -1000000,
+        "maximum": 1,
+        "which_is_better": "maximum"
+    },
+    "validation_accuracy": {
+        "minimum": 0,
+        "maximum": 1,
+        "which_is_better": "maximum"
+    }
+}

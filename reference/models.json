@@ -1,0 +1,1183 @@
+{
+    "linear_regression": {
+        "definition": "A statistical method for modeling the relationship between a dependent variable and one or more independent variables using a straight line.",
+        "metrics": ["mean_squared_error", "r2_score"],
+        "inputs": ["data (pd.DataFrame)", "target_column (str)", "test_size (float)", "random_state (int)"],
+        "outputs": ["model", "predictions", "metrics"],
+        "csv": [
+            "csv_regression"
+        ],
+        "edf": [
+            "edf_statistical_analysis",
+            "edf_correlation_analysis"
+        ],
+        "hdf5": [
+            "hdf5_statistical_analysis",
+            "hdf5_correlation_analysis"
+        ],
+        "mat": [
+            "mat_statistical_analysis",
+            "mat_correlation_analysis"
+        ]
+    },
+    "logistic_regression": {
+        "definition": "A classification algorithm that predicts the probability of a binary outcome using a logistic function.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["data (pd.DataFrame)", "target_column (str)", "test_size (float)", "random_state (int)", "penalty (str)", "C (float)", "max_iter (int)"],
+        "outputs": ["model", "predictions", "probabilities", "metrics"],
+        "txt": [
+            "txt_text_classification",
+            "txt_fake_news_detection"
+        ],
+        "csv": [
+            "csv_classification",
+            "csv_fraud_detection"
+        ]
+    },
+    "decision_tree": {
+        "definition": "A tree-structured algorithm used for classification and regression tasks by splitting data into subsets based on feature values.",
+        "metrics": {
+            "classification": ["accuracy", "precision", "recall", "f1_score"],
+            "regression": ["mean_squared_error", "r2_score"]
+        },
+        "inputs": ["data (pd.DataFrame)", "target_column (str)", "task_type (str)", "test_size (float)", "random_state (int)", "max_depth (int)", "min_samples_split (int)", "min_samples_leaf (int)"],
+        "outputs": ["model", "predictions", "metrics"],
+        "txt": [
+            "txt_text_classification",
+            "txt_fake_news_detection",
+            "txt_topic_clustering"
+        ],
+        "csv": [
+            "csv_classification",
+            "csv_root_cause_analysis",
+            "csv_anomaly_detection"
+        ],
+        "edf": [
+            "edf_root_cause_analysis",
+            "edf_causal_inference"
+        ],
+        "hdf5": [
+            "hdf5_root_cause_analysis",
+            "hdf5_causal_inference"
+        ],
+        "mat": [
+            "mat_root_cause_analysis",
+            "mat_causal_inference"
+        ]
+    },
+    "random_forest": {
+        "definition": "An ensemble learning method that combines multiple decision trees to improve accuracy and control overfitting.",
+        "metrics": {
+            "classification": ["accuracy", "precision", "recall", "f1_score"],
+            "regression": ["mean_squared_error", "r2_score"]
+        },
+        "inputs": ["data (pd.DataFrame)", "target_column (str)", "task_type (str)", "test_size (float)", "random_state (int)", "n_estimators (int)", "max_depth (int)", "min_samples_split (int)", "min_samples_leaf (int)"],
+        "outputs": ["model", "predictions", "metrics"],
+        "txt": [
+            "txt_text_classification",
+            "txt_fake_news_detection",
+            "txt_topic_clustering"
+        ],
+        "csv": [
+            "csv_classification",
+            "csv_fraud_detection",
+            "csv_feature_engineering"
+        ],
+        "edf": [
+            "edf_feature_selection",
+            "edf_root_cause_analysis"
+        ],
+        "hdf5": [
+            "hdf5_anomaly_detection",
+            "hdf5_feature_selection",
+            "hdf5_root_cause_analysis"
+        ],
+        "mat": [
+            "mat_anomaly_detection",
+            "mat_feature_selection",
+            "mat_root_cause_analysis"
+        ]
+    },
+    "svm": {
+        "definition": "Support Vector Machine, a supervised learning model used for classification and regression by finding the hyperplane that best separates classes.",
+        "metrics": {
+            "classification": ["accuracy", "precision", "recall", "f1_score"],
+            "regression": ["mean_squared_error", "r2_score"]
+        },
+        "inputs": ["data (pd.DataFrame)", "target_column (str)", "task_type (str)", "test_size (float)", "random_state (int)", "kernel (str)", "C (float)", "epsilon (float)"],
+        "outputs": ["model", "predictions", "metrics"],
+        "txt": [
+            "txt_sentiment_analysis",
+            "txt_emotion_detection",
+            "txt_text_classification"
+        ],
+        "csv": [
+            "csv_classification",
+            "csv_anomaly_detection",
+            "csv_pattern_recognition"
+        ]
+    },
+    "lstm": {
+        "definition": "Long Short-Term Memory, a type of RNN that can capture long-term dependencies in sequential data.",
+        "metrics": {
+            "classification": ["accuracy", "precision", "recall", "f1_score"],
+            "regression": ["mean_squared_error"]
+        },
+        "inputs": ["data (pd.DataFrame)", "target_column (str)", "task_type (str)", "test_size (float)", "random_state (int)", "lstm_units (int)", "embedding_dim (int)", "epochs (int)", "batch_size (int)", "learning_rate (float)"],
+        "outputs": ["model", "predictions", "metrics"],
+        "txt": [
+            "txt_text_generation",
+            "txt_sentiment_analysis",
+            "txt_opinion_mining",
+            "txt_sarcasm_detection"
+        ],
+        "csv": [
+            "csv_time_series_forecasting",
+            "csv_text_generation"
+        ],
+        "video": [
+            "video_captioning",
+            "video_summarization",
+            "event_detection_in_videos"
+        ],
+        "audio": [
+            "speech_recognition",
+            "audio_transcription",
+            "voice_conversion",
+            "accent_recognition",
+            "voice_activity_detection",
+            "language_identification"
+        ],
+        "edf": [
+            "edf_signal_analysis",
+            "edf_time_series_forecasting",
+            "edf_signal_synchronization",
+            "edf_noise_reduction"
+        ],
+        "hdf5": [
+            "hdf5_time_series_forecasting",
+            "hdf5_pattern_recognition"
+        ],
+        "mat": [
+            "mat_time_series_forecasting",
+            "mat_pattern_recognition"
+        ]
+    },
+    "rnn": {
+        "definition": "Recurrent Neural Network, a neural network designed for sequential data by maintaining a memory of previous inputs.",
+        "metrics": {
+            "classification": ["accuracy", "precision", "recall", "f1_score"],
+            "regression": ["mean_squared_error"]
+        },
+        "inputs": ["data (pd.DataFrame)", "target_column (str)", "task_type (str)", "test_size (float)", "random_state (int)", "rnn_units (int)", "embedding_dim (int)", "epochs (int)", "batch_size (int)", "learning_rate (float)"],
+        "outputs": ["model", "predictions", "metrics"],
+        "txt": [
+            "txt_language_detection",
+            "txt_spell_correction",
+            "txt_text_preprocessing"
+        ],
+        "csv": [
+            "csv_time_series_forecasting"
+        ],
+        "video": [
+            "video_captioning",
+            "video_summarization",
+            "event_detection_in_videos"
+        ],
+        "audio": [
+            "speech_recognition",
+            "audio_transcription",
+            "voice_conversion",
+            "audio_segmentation"
+        ],
+        "edf": [
+            "edf_signal_analysis",
+            "edf_time_series_forecasting",
+            "edf_signal_synchronization"
+        ],
+        "hdf5": [
+            "hdf5_time_series_forecasting"
+        ],
+        "mat": [
+            "mat_time_series_forecasting"
+        ]
+    },
+    "dnn": {
+        "definition": "Deep Neural Network, a neural network with multiple layers used for complex pattern recognition tasks.",
+        "metrics": {
+            "classification": ["accuracy", "precision", "recall", "f1_score"],
+            "regression": ["mean_squared_error", "r2_score"]
+        },
+        "inputs": ["data (np.array)", "target_column (str)", "task_type (str)", "test_size (float)", "random_state (int)", "hidden_layers (list of ints)", "activation (str)", "dropout_rate (float)", "epochs (int)", "batch_size (int)", "learning_rate (float)"],
+        "outputs": ["model", "predictions", "metrics"],
+        "txt": [
+            "txt_named_entity_recognition",
+            "txt_dependency_parsing",
+            "txt_relationship_extraction"
+        ],
+        "csv": [
+            "csv_classification",
+            "csv_multi_label_classification",
+            "csv_dependency_analysis"
+        ],
+        "video": [
+            "action_recognition",
+            "anomaly_detection_in_videos"
+        ],
+        "edf": [
+            "edf_signal_classification",
+            "edf_sleep_stage_classification"
+        ],
+        "hdf5": [
+            "hdf5_pattern_recognition",
+            "hdf5_multi_label_classification"
+        ],
+        "mat": [
+            "mat_pattern_recognition",
+            "mat_multi_label_classification"
+        ]
+    },
+    "cnn": {
+        "definition": "Convolutional Neural Network, a deep learning model primarily used for image and spatial data analysis.",
+        "metrics": {
+            "classification": ["accuracy", "precision", "recall", "f1_score"],
+            "regression": ["mean_squared_error"]
+        },
+        "inputs": ["data (np.array)", "labels (np.array)", "input_shape (tuple)", "task_type (str)", "test_size (float)", "random_state (int)", "conv_layers (list of tuples of int and tuple of ints)", "dense_layers (list of ints)", "pool_size (tuple of ints)", "dropout_rate (float)", "epochs (int)", "batch_size (int)", "learning_rate (float)", "gpu_optimized (str)"],
+        "outputs": ["model", "predictions", "metrics"],
+        "img": [
+            "image_classification",
+            "object_detection",
+            "image_segmentation",
+            "face_detection",
+            "facial_recognition",
+            "scene_understanding",
+            "gesture_recognition"
+        ],
+        "video": [
+            "video_classification",
+            "object_detection_in_videos",
+            "face_detection_in_videos",
+            "facial_recognition_in_videos",
+            "gesture_recognition_in_videos",
+            "scene_detection"
+        ],
+        "audio": [
+            "audio_classification",
+            "sound_event_detection",
+            "emotion_recognition_in_audio"
+        ],
+        "edf": [
+            "edf_signal_classification",
+            "edf_event_detection",
+            "edf_feature_extraction",
+            "edf_health_monitoring"
+        ],
+        "hdf5": [
+            "hdf5_pattern_recognition",
+            "hdf5_data_segmentation"
+        ],
+        "mat": [
+            "mat_pattern_recognition",
+            "mat_data_segmentation"
+        ]
+    },
+    "gans": {
+        "definition": "Generative Adversarial Networks, a framework consisting of a generator and discriminator to produce realistic synthetic data.",
+        "metrics": ["discriminator_loss", "discriminator_accuracy", "generator_loss"],
+        "inputs": ["data (np.array)", "input_dim (int)", "output_shape (tuple)", "task_type (str)", "gpu_optimized (str)", "generator_layers (list of ints)", "discriminator_layers (list of ints)", "epochs (int)", "batch_size (int)", "learning_rate (float)"],
+        "outputs": ["generator", "discriminator", "metrics"],
+        "img": [
+            "image_generation",
+            "style_transfer",
+            "image_inpainting",
+            "image_synthesis",
+            "image_harmonization",
+            "colorization",
+            "image_super_resolution"
+        ],
+        "video": [
+            "video_inpainting",
+            "video_style_transfer",
+            "video_harmonization",
+            "video_super_resolution",
+            "video_colorization"
+        ],
+        "audio": [
+            "audio_synthesis",
+            "audio_style_transfer",
+            "audio_inpainting"
+        ]
+    },
+    "naive_bayes": {
+        "definition": "A probabilistic classifier based on Bayes' theorem, assuming independence between features.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["data (list)", "labels (list)", "gpu_optimized (str)", "test_size (float)", "random_state (int)", "use_tfidf (bool)"],
+        "outputs": ["model", "vectorizer", "metrics"],
+        "txt": [
+            "txt_fake_news_detection",
+            "txt_sentiment_analysis"
+        ]
+    },
+    "k_means": {
+        "definition": "An unsupervised clustering algorithm that partitions data into k clusters by minimizing variance.",
+        "metrics": ["silhouette_score"],
+        "inputs": ["data (np.array)", "n_clusters (int)", "init (str)", "max_iter (int)", "n_init (int)", "random_state (int)", "gpu_optimized (str)"],
+        "outputs": ["centroids", "assignments", "metrics"],
+        "txt": [
+            "txt_topic_clustering"
+        ],
+        "csv": [
+            "csv_clustering",
+            "csv_customer_segmentation"
+        ],
+        "edf": [
+            "edf_multichannel_clustering"
+        ],
+        "hdf5": [
+            "hdf5_data_clustering",
+            "hdf5_data_segmentation"
+        ],
+        "mat": [
+            "mat_data_clustering",
+            "mat_data_segmentation"
+        ]
+    },
+    "lda": {
+        "definition": "Linear Discriminant Analysis, a classification algorithm that projects data onto a lower-dimensional space for separation.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["data (np.array)", "labels (np.array)", "test_size (float)", "n_components (int or None)", "random_state (int)", "gpu_optimized (str)"],
+        "outputs": ["model", "X_train_reduced", "X_test_reduced", "metrics"],
+        "txt": [
+            "txt_topic_modeling"
+        ]
+    },
+    "hmm": {
+        "definition": "Hidden Markov Model, a statistical model used for modeling sequences with hidden states.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["data (list of np.arrays)", "n_states (int)", "n_iter (int)", "covariance_type (str)", "gpu_optimized (str)"],
+        "outputs": ["model", "predicted_states", "metrics"],
+        "txt": [
+            "txt_dependency_parsing",
+            "txt_text_segmentation"
+        ]
+    },
+    "autoencoder": {
+        "definition": "A neural network used for unsupervised learning by compressing and reconstructing data.",
+        "metrics": ["mean_squared_error"],
+        "inputs": ["data (np.arrays)", "encoding_dim (int)", "epochs (int)", "batch_size (int)", "test_split (float)", "gpu_optimized (str)"],
+        "outputs": ["autoencoder", "encoder", "reconstructed_data", "metrics", "history"],
+        "csv": [
+            "csv_dimensionality_reduction",
+            "csv_anomaly_detection"
+        ],
+        "video": [
+            "video_inpainting",
+            "video_super_resolution"
+        ],
+        "audio": [
+            "audio_denoising",
+            "audio_super_resolution",
+            "audio_inpainting"
+        ],
+        "edf": [
+            "edf_signal_cleaning",
+            "edf_noise_reduction",
+            "edf_data_augmentation"
+        ],
+        "hdf5": [
+            "hdf5_data_cleaning",
+            "hdf5_data_compression",
+            "hdf5_data_augmentation"
+        ],
+        "mat": [
+            "mat_data_cleaning",
+            "mat_data_compression",
+            "mat_data_augmentation"
+        ]
+    },
+    "vae": {
+        "definition": "Variational Autoencoder, a type of autoencoder that learns latent variables for data generation.",
+        "metrics": ["mean_squared_error"],
+        "inputs": ["data (np.arrays)", "latent_dim (int)", "intermediate_dim (int)", "epochs (int)", "batch_size (int)", "test_split (float)", "gpu_optimized (str)"],
+        "outputs": ["vae", "encoder", "decoder", "reconstructed_data", "metrics", "history"],
+        "txt": [
+            "txt_contextual_embedding"
+        ],
+        "csv": [
+            "csv_text_embedding"
+        ],
+        "img": [
+            "image_inpainting",
+            "image_generation",
+            "image_synthesis"
+        ],
+        "video": [
+            "video_inpainting",
+            "video_harmonization"
+        ],
+        "audio": [
+            "audio_inpainting",
+            "voice_conversion",
+            "audio_style_transfer"
+        ],
+        "edf": [
+            "edf_data_augmentation",
+            "edf_signal_cleaning"
+        ],
+        "hdf5": [
+            "hdf5_data_augmentation",
+            "hdf5_dimensionality_reduction"
+        ],
+        "mat": [
+            "mat_data_augmentation",
+            "mat_dimensionality_reduction"
+        ]
+    },
+    "transformer": {
+        "definition": "A neural network architecture designed for sequence-to-sequence tasks, such as translation and text generation.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["data (np.arrays)", "labels (np.array)", "vocab_size (int)", "max_len (int)", "embedding_dim (int)", "num_heads (int)", "ff_dim (int)", "num_layers (int)", "epochs (int)", "batch_size (int)", "test_size (float)", "gpu_optimized (str)"],
+        "outputs": ["model", "metrics", "history"],
+        "txt": [
+            "txt_text_generation",
+            "txt_machine_translation",
+            "txt_fact_checking"
+        ],
+        "csv": [
+            "csv_text_generation",
+            "csv_text_embedding"
+        ],
+        "img": [
+            "image_captioning",
+            "scene_understanding",
+            "image_metadata_generation"
+        ],
+        "video": [
+            "video_captioning",
+            "video_summarization",
+            "video_metadata_generation"
+        ],
+        "audio": [
+            "speech_recognition",
+            "audio_transcription",
+            "audio_metadata_generation",
+            "language_identification"
+        ],
+        "edf": [
+            "edf_signal_analysis",
+            "edf_time_series_forecasting",
+            "edf_metadata_generation"
+        ],
+        "hdf5": [
+            "hdf5_time_series_forecasting",
+            "hdf5_metadata_generation"
+        ],
+        "mat": [
+            "mat_time_series_forecasting",
+            "mat_metadata_generation"
+        ]
+    },
+    "bert": {
+        "definition": "Bidirectional Encoder Representations from Transformers, a transformer model for NLP tasks.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["data (list)", "model_name (str)", "max_len (int)", "batch_size (int)", "epochs (int)", "test_split (float)", "gpu_optimized (str)"],
+        "outputs": ["model", "tokenizer", "metrics", "history"],
+        "txt": [
+            "txt_text_summarization",
+            "txt_named_entity_recognition",
+            "txt_contextual_embedding",
+            "txt_fact_checking"
+        ],
+        "audio": [
+            "language_identification",
+            "emotion_recognition_in_audio"
+        ],
+        "hdf5": [
+            "hdf5_metadata_generation"
+        ],
+        "mat": [
+            "mat_metadata_generation"
+        ]
+    },
+    "gpt": {
+        "definition": "Generative Pre-trained Transformer, a transformer model optimized for text generation.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["data (list)", "labels (list)", "model_name (str)", "max_len (int)", "batch_size (int)", "epochs (int)", "test_split (float)", "gpu_optimized (str)"],
+        "outputs": ["model", "tokenizer", "metrics", "history"],
+        "txt": [
+            "txt_text_generation",
+            "txt_machine_translation",
+            "txt_fact_checking"
+        ],
+        "hdf5": [
+            "hdf5_data_annotation"
+        ],
+        "mat": [
+            "mat_data_annotation"
+        ]
+    },
+    "gru": {
+        "definition": "Gated Recurrent Unit, a simpler alternative to LSTM for sequential data processing.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["data (np.array)", "labels (np.array)", "vocab_size (int)", "embedding_dim (int)", "max_len (int)", "gru_units (int)", "dropout_rate (float)", "batch_size (int)", "epochs (int)", "test_size (float)", "gpu_optimized (str)"],
+        "outputs": ["model", "metrics", "history"],
+        "txt": [
+            "txt_text_classification",
+            "txt_sentiment_analysis",
+            "txt_opinion_mining"
+        ],
+        "audio": [
+            "speech_recognition",
+            "voice_activity_detection"
+        ]
+    },
+    "bayesian_network": {
+        "definition": "A graphical model representing probabilistic relationships among variables.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["data (np.array)", "structure (list of tuples - matching types)", "labels (np.array)", "test_split (float)", "gpu_optimized (str)"],
+        "outputs": ["model", "metrics", "inference"],
+        "txt": [
+            "txt_relationship_extraction"
+        ],
+        "csv": [
+            "csv_causal_inference"
+        ],
+        "edf": [
+            "edf_causal_inference"
+        ],
+        "hdf5": [
+            "hdf5_causal_inference"
+        ],
+        "mat": [
+            "mat_causal_inference"
+        ]
+    },
+    "markov_chain": {
+        "definition": "A stochastic model describing a sequence of events where the probability of each event depends only on the state of the previous event.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["transition_matrix (2D np.array)", "states (list)", "initial_state (str)", "sequence_length (int)", "gpu_optimized (str)", "true_sequence (list, optional)"],
+        "outputs": ["sequence", "metrics"],
+        "csv": [
+            "csv_simulation"
+        ],
+        "video": [
+            "event_detection_in_videos"
+        ],
+        "audio": [
+            "sound_localization",
+            "audio_event_tracking"
+        ],
+        "edf": [
+            "edf_event_annotation",
+            "edf_signal_synchronization"
+        ],
+        "hdf5": [
+            "hdf5_simulation_modeling"
+        ],
+        "mat": [
+            "mat_simulation_modeling"
+        ]
+    },
+    "isolation_forest": {
+        "definition": "An unsupervised learning algorithm designed to isolate anomalies by partitioning data using random splits.",
+        "metrics": ["precision", "recall", "f1_score", "roc_auc"],
+        "inputs": ["data (np.array)", "contamination (float)", "n_estimators (int)", "max_samples (int or 'auto')", "random_state (int)", "gpu_optimized (str)"],
+        "outputs": ["model", "predictions", "metrics"],
+        "csv": [
+            "csv_anomaly_detection",
+            "csv_fraud_detection"
+        ],
+        "video": [
+            "anomaly_detection_in_videos"
+        ],
+        "audio": [
+            "audio_anomaly_detection",
+            "audio_event_tracking"
+        ],
+        "edf": [
+            "edf_anomaly_detection",
+            "edf_biomarker_discovery"
+        ],
+        "hdf5": [
+            "hdf5_anomaly_detection"
+        ],
+        "mat": [
+            "mat_anomaly_detection"
+        ]
+    },
+    "dbscan": {
+        "definition": "Density-Based Spatial Clustering of Applications with Noise, an unsupervised clustering algorithm.",
+        "metrics": ["precision", "recall", "f1_score", "adjusted_rand_index"],
+        "inputs": ["data (np.array)", "eps (float)", "min_samples (int)", "metric (str)", "gpu_optimized (str)"],
+        "outputs": ["model", "cluster_labels", "metrics"],
+        "edf": [
+            "edf_multichannel_clustering"
+        ],
+        "hdf5": [
+            "hdf5_data_clustering",
+            "hdf5_anomaly_detection"
+        ],
+        "mat": [
+            "mat_data_clustering",
+            "mat_anomaly_detection"
+        ]
+    },
+    "xgboost": {
+        "definition": "An optimized implementation of gradient boosting for structured data classification and regression.",
+        "metrics": {
+            "classification": ["accuracy", "precision", "recall", "f1_score"],
+            "regression": ["mean_squared_error", "mean_absolute_error"]
+        },
+        "inputs": ["data (np.array)", "labels (np.array)", "task_type (str)", "gpu_optimized (str)", "test_size (float)", "random_state (int)", "**xgb_params (dict)"],
+        "outputs": ["model", "predictions", "metrics"],
+        "txt": [
+            "txt_text_classification",
+            "txt_fake_news_detection"
+        ],
+        "csv": [
+            "csv_classification",
+            "csv_fraud_detection"
+        ],
+        "audio": [
+            "music_genre_classification",
+            "audio_anomaly_detection"
+        ],
+        "edf": [
+            "edf_feature_selection",
+            "edf_anomaly_detection",
+            "edf_biomarker_discovery"
+        ],
+        "hdf5": [
+            "hdf5_anomaly_detection",
+            "hdf5_feature_selection",
+            "hdf5_multi_label_classification"
+        ],
+        "mat": [
+            "mat_anomaly_detection",
+            "mat_feature_selection",
+            "mat_multi_label_classification"
+        ]
+    },
+    "lightgbm": {
+        "definition": "A gradient boosting framework that is fast and efficient for large datasets.",
+        "metrics": {
+            "classification": ["accuracy", "precision", "recall", "f1_score"],
+            "regression": ["mean_squared_error", "mean_absolute_error"]
+        },
+        "inputs": ["data (np.array)", "labels (np.array)", "task_type (str)", "gpu_optimized (str)", "test_size (float)", "random_state (int)", "**lgbm_params (dict)"],
+        "outputs": ["model", "predictions", "metrics"],
+        "txt": [
+            "txt_text_classification",
+            "txt_fake_news_detection"
+        ],
+        "csv": [
+            "csv_classification",
+            "csv_feature_engineering"
+        ],
+        "edf": [
+            "edf_anomaly_detection",
+            "edf_feature_selection"
+        ],
+        "hdf5": [
+            "hdf5_anomaly_detection",
+            "hdf5_feature_selection"
+        ],
+        "mat": [
+            "mat_anomaly_detection",
+            "mat_feature_selection"
+        ]
+    },
+    "catboost": {
+        "definition": "A gradient boosting algorithm particularly effective for categorical data.",
+        "metrics": {
+            "classification": ["accuracy", "precision", "recall", "f1_score"],
+            "regression": ["mean_squared_error", "mean_absolute_error"]
+        },
+        "inputs": ["data (np.array)", "labels (np.array)", "task_type (str)", "gpu_optimized (str)", "test_size (float)", "random_state (int)", "**catboost_params (dict)"],
+        "outputs": ["model", "predictions", "metrics"],
+        "txt": [
+            "txt_text_classification",
+            "txt_fake_news_detection"
+        ],
+        "csv": [
+            "csv_classification",
+            "csv_text_classification"
+        ],
+        "audio": [
+            "music_genre_classification",
+            "audio_classification"
+        ]
+    },
+    "capsule_network": {
+        "definition": "A neural network architecture designed to capture hierarchical relationships in spatial data.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["input_shape (tuple)", "n_classes (int)", "gpu_optimized (str)", "num_primary_capsules (int)", "dim_primary_capsules (int)", "routing_iterations (int)", "learning_rate (float)", "epochs (int)", "batch_size (int)", "X_train (np.array)", "y_train (np.array)", "X_test (np.array)", "y_test (np.array)"],
+        "outputs": ["model", "metrics"],
+        "img": [
+            "pose_estimation",
+            "gesture_recognition"
+        ],
+        "audio": [
+            "emotion_recognition_in_audio"
+        ],
+        "edf": [
+            "edf_sleep_stage_classification"
+        ]
+    },
+    "spiking_neural_network": {
+        "definition": "A biologically inspired neural network that models neuron spikes.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["input_shape (tuple)", "n_classes (int)", "gpu_optimized (str)", "spike_threshold (float)", "learning_rate (float)", "epochs (int)", "batch_size (int)", "num_conv_layers (int)", "num_dense_layers (int)", "pool_size (tuple of ints)", "conv_filters (list of ints)", "dense_units (list of ints)", "X_train (np.array)", "y_train (np.array)", "X_test (np.array)", "y_test (np.array)"],
+        "outputs": ["model", "metrics"],
+        "img": [
+            "gesture_recognition",
+            "object_tracking"
+        ],
+        "video": [
+            "gesture_recognition_in_videos"
+        ]
+    },
+    "hopfield_network": {
+        "definition": "A type of recurrent neural network that serves as a content-addressable memory system.",
+        "metrics": ["accuracy"],
+        "inputs": ["data (np.array)", "patterns (np.array)", "gpu_optimized (str)", "max_iter (int)", "threshold (float)"],
+        "outputs": ["recalled_patterns", "metrics", "weight_matrix"],
+        "audio": [
+            "audio_style_transfer"
+        ]
+    },
+    "gradient_boosting": {
+        "definition": "An ensemble technique that builds models sequentially to correct errors of previous models.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["data (np.array)", "labels (np.array)", "gpu_optimized (str)", "test_size (float)", "random_state (int)", "n_estimators (int)", "learning_rate (float)", "max_iter (int)"],
+        "outputs": ["model", "metrics", "predictions"],
+        "audio": [
+            "audio_anomaly_detection"
+        ],
+        "edf": [
+            "edf_feature_selection",
+            "edf_biomarker_discovery",
+            "edf_health_monitoring"
+        ],
+        "hdf5": [
+            "hdf5_feature_selection",
+            "hdf5_statistical_analysis"
+        ],
+        "mat": [
+            "mat_feature_selection",
+            "mat_statistical_analysis"
+        ]
+    },
+    "elastic_net": {
+        "definition": "Combines L1 and L2 regularization for linear regression or classification.",
+        "metrics": ["mean_squared_error", "r2_score"],
+        "inputs": ["data (np.array)", "labels (np.array)", "gpu_optimized (str)", "test_size (float)", "random_state (int)", "alpha (float)", "l1_ratio (float)", "max_iter (int)"],
+        "outputs": ["model", "metrics", "predictions"],
+        "csv": [
+            "csv_regression"
+        ]
+    },
+    "ridge_regression": {
+        "definition": "A linear regression model with L2 regularization.",
+        "metrics": ["mean_squared_error", "r2_score"],
+        "inputs": ["data (np.array)", "labels (np.array)", "gpu_optimized (str)", "test_size (float)", "random_state (int)", "alpha (float)"],
+        "outputs": ["model", "metrics", "predictions"],
+        "csv": [
+            "csv_regression"
+        ],
+        "edf": [
+            "edf_statistical_analysis",
+            "edf_correlation_analysis"
+        ]
+    },
+    "lasso_regression": {
+        "definition": "A linear regression model with L1 regularization.",
+        "metrics": ["mean_squared_error", "r2_score"],
+        "inputs": ["data (np.array)", "labels (np.array)", "gpu_optimized (str)", "test_size (float)", "random_state (int)", "alpha (float)", "max_iter (int)"],
+        "outputs": ["model", "metrics", "predictions"],
+        "csv": [
+            "csv_regression"
+        ],
+        "edf": [
+            "edf_statistical_analysis",
+            "edf_feature_selection"
+        ]
+    },
+    "gaussian_naive_bayes": {
+        "definition": "A variant of Naive Bayes for continuous data.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["data (np.array)", "labels (np.array)", "gpu_optimized (str)", "test_size (float)", "random_state (int)"],
+        "outputs": ["model", "metrics", "predictions"],
+        "csv": [
+            "csv_classification"
+        ]
+    },
+    "linear_perceptron": {
+        "definition": "A simple binary classifier, the foundation of neural networks.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["data (np.array)", "labels (np.array)", "gpu_optimized (str)", "test_size (float)", "random_state (int)", "max_iter (int)", "eta0 (float)"],
+        "outputs": ["model", "metrics", "predictions"],
+        "csv": [
+            "csv_classification"
+        ]
+    },
+    "neural_collaborative_filtering": {
+        "definition": "A model for recommendation systems using deep learning.",
+        "metrics": ["mean_squared_error"],
+        "inputs": ["data (np.array)", "labels (np.array)", "ratings (np.array)", "gpu_optimized (str)", "embedding_dim (int)", "hidden_units (list)", "activation (str)", "dropout_rate (float)", "learning_rate (float)", "epochs (int)", "batch_size (int)", "test_size (float)", "random_state (int)"],
+        "outputs": ["model", "metrics", "predictions"],
+        "csv": [
+            "csv_recommendation_systems"
+        ]
+    },
+    "deep_belief_network": {
+        "definition": "A type of generative deep learning model based on Restricted Boltzmann Machines.",
+        "metrics": ["accuracy", "mean_squared_error"],
+        "inputs": ["data (np.array)", "labels (np.array)", "layer_sizes (list)", "gpu_optimized (str)", "pretrain_epochs (int)", "fine_tune_epochs (int)", "batch_size (int)", "test_size (float)", "learning_rate (float)", "random_state (int)"],
+        "outputs": ["model", "metrics", "predictions"],
+        "csv": [
+            "csv_dimensionality_reduction"
+        ],
+        "audio": [
+            "audio_super_resolution"
+        ],
+        "edf": [
+            "edf_signal_classification",
+            "edf_signal_analysis"
+        ],
+        "hdf5": [
+            "hdf5_dimensionality_reduction"
+        ],
+        "mat": [
+            "mat_dimensionality_reduction"
+        ]
+    },
+    "gradient_boosted_decision_trees": {
+        "definition": "A general term for tree-based boosting models like XGBoost, LightGBM, and CatBoost.",
+        "metrics": {
+            "classification": ["accuracy", "precision", "recall", "f1_score"],
+            "regression": ["mean_squared_error"]
+        },
+        "inputs": ["data (np.array)", "labels (np.array)", "task_type (str)", "gpu_optimized (str)", "test_size (float)", "random_state (int)", "n_estimators (int)", "learning_rate (float)", "max_depth (int)", "subsample (float)", "colsample_bytree (float)"],
+        "outputs": ["model", "metrics", "predictions"],
+        "txt": [
+            "txt_text_classification",
+            "txt_fake_news_detection"
+        ],
+        "csv": [
+            "csv_classification",
+            "csv_fraud_detection"
+        ],
+        "video": [
+            "anomaly_detection_in_videos"
+        ]
+    },
+    "markov_random_field": {
+        "definition": "A probabilistic model for capturing spatial dependencies in data.",
+        "metrics": ["accuracy", "f1_score"],
+        "inputs": ["num_nodes (int)", "num_states (int)", "gpu_optimized (str)", "max_iter (int)", "labels (np.array)"],
+        "outputs": ["model", "marginals", "metrics", "predicted_labels"],
+        "img": [
+            "image_harmonization",
+            "scene_understanding"
+        ]
+    },
+    "kalman_filter": {
+        "definition": "A probabilistic model for time-series analysis and state estimation.",
+        "metrics": ["mean_mse"],
+        "inputs": ["state_dim (int)", "measurement_dim (int)", "gpu_optimized (str)", "num_steps (int)", "true_states (np.array)", "measurements (np.array)"],
+        "outputs": ["model", "metrics", "predicted_states"],
+        "csv": [
+            "csv_time_series_forecasting"
+        ],
+        "img": [
+            "object_tracking",
+            "pose_estimation"
+        ],
+        "video": [
+            "object_tracking_in_videos",
+            "pose_estimation_in_videos",
+            "optical_flow_analysis"
+        ],
+        "audio": [
+            "sound_localization",
+            "audio_event_tracking"
+        ],
+        "edf": [
+            "edf_signal_synchronization"
+        ],
+        "hdf5": [
+            "hdf5_simulation_modeling"
+        ],
+        "mat": [
+            "mat_simulation_modeling"
+        ]
+    },
+    "vision_transformer": {
+        "definition": "A transformer model adapted for image classification tasks by treating image patches as tokens.",
+        "metrics": ["validation_loss", "validation_accuracy"],
+        "inputs": ["image_size (int)", "patch_size (int)", "num_classes (int)", "d_model (int)", "num_heads (int)", "num_layers (int)", "mlp_dim (int)", "dropout_rate (float)", "gpu_optimized (str)", "train_data (tf.data.Dataset)", "val_data (tf.data.Dataset)", "epochs (int)"],
+        "outputs": ["model", "metrics", "predictions"],
+        "csv": [
+            "csv_text_embedding"
+        ],
+        "img": [
+            "image_classification",
+            "scene_understanding"
+        ],
+        "video": [
+            "video_classification",
+            "scene_detection"
+        ]
+    },
+    "contrastive_learning": {
+        "definition": "A self-supervised learning framework that learns representations by contrasting positive and negative examples.",
+        "metrics": ["embedding_variance"],
+        "inputs": ["feature_dim (int)", "temperature (float)", "input_shape (tuple)", "gpu_optimized (str)", "train_data (tf.data.Dataset)", "val_data (tf.data.Dataset)", "epochs (int)"],
+        "outputs": ["model", "metrics"],
+        "csv": [
+            "csv_text_embedding"
+        ],
+        "audio": [
+            "sound_matching",
+            "audio_anomaly_detection"
+        ],
+        "edf": [
+            "edf_feature_extraction",
+            "edf_biomarker_discovery"
+        ],
+        "hdf5": [
+            "hdf5_data_integration",
+            "hdf5_data_augmentation"
+        ],
+        "mat": [
+            "mat_data_integration",
+            "mat_data_augmentation"
+        ]
+    },
+    "simclr": {
+        "definition": "A contrastive learning framework for self-supervised representation learning on images.",
+        "metrics": ["embedding_variance"],
+        "inputs": ["feature_dim (int)", "temperature (float)", "input_shape (tuple)", "gpu_optimized (str)", "train_data (tf.data.Dataset)", "val_data (tf.data.Dataset)", "epochs (int)"],
+        "outputs": ["encoder", "metrics"],
+        "csv": [
+            "csv_text_embedding"
+        ],
+        "img": [
+            "image_super_resolution",
+            "feature_extraction"
+        ],
+        "video": [
+            "video_super_resolution",
+            "video_stabilization"
+        ],
+        "audio": [
+            "audio_anomaly_detection"
+        ],
+        "edf": [
+            "edf_data_augmentation",
+            "edf_feature_extraction"
+        ],
+        "hdf5": [
+            "hdf5_data_augmentation"
+        ],
+        "mat": [
+            "mat_data_augmentation"
+        ]
+    },
+    "byol": {
+        "definition": "Bootstrap Your Own Latent, a contrastive learning method that avoids negative pairs.",
+        "metrics": ["embedding_variance"],
+        "inputs": ["input_shape (tuple)", "projection_dim (int)", "predictor_dim (int)", "gpu_optimized (str)", "train_data (tf.data.Dataset)", "val_data (tf.data.Dataset)", "epochs (int)"],
+        "outputs": ["encoder", "predictor", "metrics"],
+        "csv": [
+            "csv_text_embedding"
+        ],
+        "img": [
+            "feature_extraction",
+            "scene_understanding"
+        ],
+        "video": [
+            "video_metadata_generation",
+            "scene_detection"
+        ],
+        "audio": [
+            "audio_metadata_generation",
+            "sound_matching"
+        ]
+    },
+    "clip": {
+        "definition": "Contrastive Language - Image Pretraining, a model that learns to associate images with text.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["image_data (np.array)", "text_data (np.array)", "labels (np.array)", "image_input_shape (tuple)", "text_embedding_dim (int)", "projection_dim (int)", "learning_rate (float)", "batch_size (int)", "epochs (int)", "gpu_optimized (str)"],
+        "outputs": ["model", "history", "metrics"],
+        "csv": [
+            "csv_text_embedding"
+        ],
+        "img": [
+            "image_captioning",
+            "scene_understanding"
+        ],
+        "video": [
+            "video_captioning",
+            "scene_detection"
+        ],
+        "edf": [
+            "edf_metadata_generation"
+        ],
+        "hdf5": [
+            "hdf5_metadata_generation"
+        ],
+        "mat": [
+            "mat_metadata_generation"
+        ]
+    },
+    "dino": {
+        "definition": "A self-supervised vision transformer framework for learning representations without labeled data.",
+        "metrics": ["accuracy", "f1_score"],
+        "inputs": ["data (np.array)", "labels (np.array)", "input_shape (tuple)", "patch_size (int)", "num_heads (int)", "projection_dim (int)", "num_layers (int)", "batch_size (int)", "epochs (int)", "gpu_optimized (str)", "validation_split (float)"],
+        "outputs": ["model", "history", "metrics"],
+        "img": [
+            "image_classification",
+            "scene_understanding"
+        ]
+    },
+    "swin_transformer": {
+        "definition": "A hierarchical transformer model designed for image analysis tasks.",
+        "metrics": ["accuracy", "precision", "recall", "f1_score"],
+        "inputs": ["input_shape (tuple)", "num_classes (int)", "train_data (np.array)", "labels (np.array)", "test_data (np.array)", "test_labels (np.array)", "batch_size (int)", "epochs (int)", "learning_rate (float)", "gpu_optimized (str)"],
+        "outputs": ["model", "history", "metrics"],
+        "video": [
+            "video_classification",
+            "scene_detection"
+        ]
+    },
+    "mlp_mixer": {
+        "definition": "A neural network architecture that uses multi-layer perceptrons for image analysis instead of convolutions or transformers.",
+        "metrics": ["accuracy", "f1_score"],
+        "inputs": ["input_shape (tuple)", "num_classes (int)", "train_data (np.array)", "labels (np.array)", "test_data (np.array)", "test_labels (np.array)", "batch_size (int)", "epochs (int)", "learning_rate (float)", "gpu_optimized (str)"],
+        "outputs": ["model", "history", "metrics"],
+        "img": [
+            "image_classification"
+        ],
+        "hdf5": [
+            "hdf5_multi_label_classification"
+        ],
+        "mat": [
+            "mat_multi_label_classification"
+        ]
+    },
+    "deep_lab": {
+        "definition": "A deep learning model for semantic image segmentation.",
+        "metrics": ["loss", "accuracy", "mean_iou"],
+        "inputs": ["input_shape (tuple)", "num_classes (int)", "train_data (np.array)", "labels (np.array)", "val_data (np.array)", "val_labels (np.array)", "test_data (np.array)", "test_labels (np.array)", "learning_rate (float)", "gpu_optimized (str)", "batch_size (int)", "epochs (int)"],
+        "outputs": ["model", "history", "metrics"],
+        "img": [
+            "image_segmentation",
+            "scene_understanding"
+        ],
+        "video": [
+            "video_segmentation"
+        ]
+    },
+    "mask_rcnn": {
+        "definition": "A deep learning model for instance segmentation, extending Faster R-CNN with a mask prediction branch.",
+        "metrics": ["loss", "accuracy", "mean_iou"],
+        "inputs": ["input_shape (tuple)", "num_classes (int)", "train_data (np.array)", "labels (np.array)", "val_data (np.array)", "val_labels (np.array)", "test_data (np.array)", "test_labels (np.array)", "learning_rate (float)", "gpu_optimized (str)", "batch_size (int)", "epochs (int)"],
+        "outputs": ["model", "history", "metrics"],
+        "img": [
+            "object_detection",
+            "image_segmentation"
+        ],
+        "video": [
+            "video_segmentation",
+            "object_detection_in_videos"
+        ]
+    },
+    "efficientnet": {
+        "definition": "A family of convolutional neural networks optimized for both accuracy and efficiency.",
+        "metrics": ["accuracy"],
+        "inputs": ["version (str)", "variant (str)", "input_shape (tuple)", "num_classes (int)", "train_data (np.array)", "labels (np.array)", "val_data (np.array)", "val_labels (np.array)", "test_data (np.array)", "test_labels (np.array)", "learning_rate (float)", "batch_size (int)", "epochs (int)", "gpu_optimized (str)", "metrics (list)", "task_type (str)", "patience (int)"],
+        "outputs": ["model", "history", "metrics"],
+        "img": [
+            "image_classification",
+            "image_enhancement"
+        ],
+        "video": [
+            "video_classification",
+            "video_stabilization"
+        ]
+    },
+    "resnet": {
+        "definition": "Residual Networks, a type of CNN with skip connections to ease training deeper networks.",
+        "metrics": ["accuracy"],
+        "inputs": ["variant (str)", "input_shape (tuple)", "num_classes (int)", "train_data (np.array)", "labels (np.array)", "val_data (np.array)", "val_labels (np.array)", "test_data (np.array)", "test_labels (np.array)", "learning_rate (float)", "batch_size (int)", "epochs (int)", "gpu_optimized (str)", "metrics (list)", "task_type (str)", "patience (int)"],
+        "outputs": ["model", "history", "metrics"],
+        "img": [
+            "image_classification",
+            "feature_extraction",
+            "image_super_resolution"
+        ],
+        "video": [
+            "video_classification",
+            "video_super_resolution"
+        ]
+    },
+    "unet": {
+        "definition": "A convolutional neural network architecture for biomedical image segmentation.",
+        "metrics": ["accuracy", "precision"],
+        "inputs": ["input_shape (tuple)", "num_classes (int)", "train_data (np.array)", "labels (np.array)", "val_data (np.array)", "val_labels (np.array)", "test_data (np.array)", "test_labels (np.array)", "base_filters (int)", "dropout_rate (float)", "batch_size (int)", "epochs (int)", "learning_rate (float)", "gpu_optimized (str)", "metrics (list)", "patience (int)"],
+        "outputs": ["model", "history", "metrics"],
+        "img": [
+            "image_segmentation",
+            "image_inpainting"
+        ],
+        "video": [
+            "3d_reconstruction_from_videos"
+        ]
+    },
+    "yolo": {
+        "definition": "You Only Look Once, a real-time object detection model.",
+        "metrics": ["accuracy", "f1_score"],
+        "inputs": ["input_shape (tuple)", "num_classes (int)", "train_data (np.array)", "labels (np.array)", "val_data (np.array)", "val_labels (np.array)", "test_data (np.array)", "test_labels (np.array)", "anchors (list of tuples of ints or floats)", "batch_size (int)", "epochs (int)", "learning_rate (float)", "gpu_optimized (str)", "metrics (list)", "patience (int)"],
+        "outputs": ["model", "history", "metrics"],
+        "img": [
+            "object_detection",
+            "object_tracking",
+            "face_detection"
+        ],
+        "video": [
+            "object_detection_in_videos",
+            "object_tracking_in_videos",
+            "face_detection_in_videos",
+            "gesture_recognition_in_videos"
+        ],
+        "audio": [
+            "sound_event_detection"
+        ]
+    },
+    "ssd": {
+        "definition": "Single Shot MultiBox Detector, a model for object detection.",
+        "metrics": ["accuracy", "precision"],
+        "inputs": ["input_shape (tuple)", "num_classes (int)", "train_data (np.array)", "labels (np.array)", "val_data (np.array)", "val_labels (np.array)", "test_data (np.array)", "test_labels (np.array)", "base_model_filters (int)", "batch_size (int)", "epochs (int)", "learning_rate (float)", "gpu_optimized (str)", "metrics (list)", "patience (int)"],
+        "outputs": ["model", "history", "metrics"],
+        "img": [
+            "object_detection",
+            "object_tracking"
+        ],
+        "video": [
+            "object_detection_in_videos",
+            "object_tracking_in_videos"
+        ]
+    },
+    "vit_gpt2": {
+        "definition": "A multi-modal model combining Vision Transformer for images and GPT-2 for text.",
+        "metrics": ["accuracy", "precision"],
+        "inputs": ["input_shape (tuple)", "num_classes (int)", "train_data (np.array)", "labels (np.array)", "test_data (np.array)", "test_labels (np.array)", "vit_model_name (str)", "gpt2_model_name (str)", "batch_size (int)", "epochs (int)", "learning_rate (float)", "gpu_optimized (str)", "metrics (list)", "patience (int)"],
+        "outputs": ["model", "history", "metrics"],
+        "audio": [
+            "audio_synthesis"
+        ]
+    }
+}

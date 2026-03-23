@@ -38,6 +38,9 @@
 | `preprocess_data.py` | ONLY FOR MDQML. Function to ingest your data for the first time. If you make any changes to these functions, you must describe your changes to it into EDITS.md. |
 | `load_data.py` | ONLY FOR MDQML. Function to ingest your data after it has been preprocessed (this saves you time). If you make any changes to these functions, you must describe your changes to it into EDITS.md. |
 | `EDITS.md` | This is where you will keep track of any changes (and why) you made to fundamental files such as preprocess_data.py and load_data.py. |
+| `reference folder` | Use this as inspiration for what we are building. The goal is to have a uniform set of inputs, outputs, metrics (helps us evaluate model performance), models across our entire project. These sets are not infinite. We want to constrain our model building by these. |
+| `reference/models.py` | Use this as inspiration for your training and model building. I don't want you to use these exact ones in your implementation. Pull from here and put into the team models.py as needed and use them as starting points. Improve and adapt these. |
+| `models.py` | Build the dynamic models that are reusable and not specific to your use case. These must be able to adapt to any inputs passed in. Any parameter that can be changed must be passed in as a variable, no hard-coded values. ie we should never have multiple cnn models. We should have 1 cnn function that is highly adaptable and can be used for any problem requiring a CNN. Review coding_guidelines.pdf on Sharepoint. |
 
 ---
 
@@ -151,8 +154,7 @@
     - Returns a mapping of the external data and a unique id for the database entry.
 
 3. load_data.py
-    - Use this for loading data after you have already preprocessed it, this will be faster
-    and save time in subsequent iterations.
+    - Use this for loading data from cleaned_data folder after you have already preprocessed it, this will be faster and save time in subsequent iterations.
 
 
 ## 9. Future steps - Expand into this
