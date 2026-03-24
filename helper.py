@@ -483,3 +483,22 @@ def get_current_timestamp_new_york():
     timestamp = int(round(now.timestamp()))
     timestamp = timestamp
     return timestamp
+
+
+def build_master_dictionary(txt_data, csv_data, image_data, video_data, audio_data, signal_data):
+    # Build a master dictionary grouped by data type
+    master_data = {
+        "txt": txt_data if txt_data else {},
+        "csv": csv_data if csv_data else {},
+        "image": image_data if image_data else {},
+        "video": video_data if video_data else {},
+        "audio": audio_data if audio_data else {},
+        "signal": signal_data if signal_data else {}
+    }
+
+    print("\n=== Master Preprocessing Results ===")
+    for modality, data in master_data.items():
+        print(f"{modality.upper()}:\n {data}\n")
+    print("====================================\n")
+
+    return master_data

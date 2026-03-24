@@ -7,7 +7,7 @@
 1. Clone the repo and enter the folder:
    ```bash
    git clone git@github.com:thinkbubble/TB_your_first_name.git
-   cd TB_your_first_name
+   cd TB_MDQML
    ```
 2. Create and activate virtual environment:
    ```bash
