@@ -1,4 +1,10 @@
 
+import os
+import sys
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(BASE_DIR)
 from preprocess_data import sensing_and_signal_ingestion
 
 def main():
@@ -8,7 +14,7 @@ def main():
     # ie.
     # video_data = load_preprocessed_video(./cleaned_data/npz_path)
     my_folder = 'team_amrutha'
-    raw_data_folder_path = f'./{my_folder}/raw_data'
+    raw_data_folder_path = f'./{my_folder}/raw_data/archive'
     cleaned_data_folder_path = f'./{my_folder}/cleaned_data'
     checkpoint_file_path = f'./{my_folder}/job_data.csv'
     

@@ -42,14 +42,15 @@ def identify_that_file_types_in_folder_are_allowed(folder_name):
 
     # Check all files in the specified folder
     try:
-        for filename in os.listdir(folder_name):
-            ext = os.path.splitext(filename)[1][1:].lower()
-            if ext:
+        for root, _, files in os.walk(folder_name):
+            for filename in files:
+                if filename.startswith('.'):
+                    continue
+                ext = os.path.splitext(filename)[1][1:].lower()
+                
                 # Count each extension
-                if ext in extension_count:
-                    extension_count[ext] += 1
-                else:
-                    extension_count[ext] = 1
+                if ext:
+                    extension_count[ext] = extension_count.get(ext, 0) + 1
 
     except FileNotFoundError:
         return (False, f"Folder '{folder_name}' does not exist")
@@ -71,15 +72,19 @@ def gather_folder_statistics(folder_name):
 
     print('file_types: ', file_types)
 
-    if (file_types[0] == False):
-        return False, False, False, False, False
+    #if number_of_files == 0:
+        #return 0, {}, 0, 'null', 'null', {}
     
     number_of_files = count_number_of_files_in_folder(folder_name)
+    print("number_of_files: ", number_of_files)
+
     
     total_file_size_in_bytes = calculate_total_file_size_in_folder(folder_name)
-    
-    if ('csv' in file_types[1]):
-        total_rows, total_columns = calculate_total_rows_and_columns(folder_name)
+    print("total_file_size_in_bytes: ", total_file_size_in_bytes)
+
+    rows_and_columns = calculate_total_rows_and_columns(folder_name)
+    if isinstance(rows_and_columns, tuple):
+        total_rows, total_columns = rows_and_columns
     else:
         total_rows, total_columns = 'null', 'null'
 
@@ -95,8 +100,10 @@ def count_number_of_files_in_folder(folder_name):
     """Counts the total number of visible files in the specified folder, excluding hidden files."""
     total_files = 0
     try:
-        for entry in os.scandir(folder_name):
-            if entry.is_file() and not entry.name.startswith('.'):
+        for root, _, files in os.walk(folder_name):
+            for filename in files:
+                if filename.startswith('.'):
+                    continue
                 total_files += 1
     except FileNotFoundError:
         return f"Folder '{folder_name}' does not exist"
@@ -107,9 +114,12 @@ def calculate_total_file_size_in_folder(folder_name):
     """Calculates the total file size of all files in the folder in bytes."""
     total_size = 0
     try:
-        for entry in os.scandir(folder_name):
-            if entry.is_file():
-                total_size += os.path.getsize(entry.path)
+        for root, _, files in os.walk(folder_name):
+            for filename in files:
+                if filename.startswith('.'):
+                    continue
+                file_path = os.path.join(root, filename)
+                total_size += os.path.getsize(file_path)
     except FileNotFoundError:
         return f"Folder '{folder_name}' does not exist"
     return total_size
@@ -120,16 +130,26 @@ def calculate_total_rows_and_columns(folder_name):
     unique_columns = set()
 
     try:
+        for root, _, files in os.walk(folder_name):
+            for filename in files:
+                if filename.startswith('.'):
+                    continue
+
+                if filename.lower().endswith('.csv'):
+                    file_path = os.path.join(root, filename)
+                    df = pd.read_csv(file_path)
+                    total_rows += len(df)
+                    unique_columns.update(df.columns)
         # List all files in the directory
-        for entry in os.scandir(folder_name):
+        #for entry in os.scandir(folder_name):
             # Check if the file is a CSV
-            if entry.is_file() and entry.name.endswith('.csv'):
+            #if entry.is_file() and entry.name.endswith('.csv'):
                 # Read the CSV file
-                df = pd.read_csv(entry.path)
+                #df = pd.read_csv(entry.path)
                 # Add the number of rows in this file to the total count
-                total_rows += len(df)
+                #total_rows += len(df)
                 # Add column names to the set of unique columns
-                unique_columns.update(df.columns)
+                #unique_columns.update(df.columns)
 
     except FileNotFoundError:
         return f"Folder '{folder_name}' does not exist"

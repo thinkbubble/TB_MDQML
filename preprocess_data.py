@@ -205,38 +205,37 @@ def preprocess_image_data_in_folder(folder_path, output_dir="./cleaned_data",
 
     print("\nBeginning image pre-processing...")
 
-    for filename in os.listdir(folder_path):
-        if filename.lower().endswith((".png", ".jpg", ".jpeg")):
-            file_path = os.path.join(folder_path, filename)
+    for root, _, files in os.walk(folder_path):
+        print(files)
+        for filename in files:
+            if filename.startswith("."):
+                continue
+            if filename.lower().endswith((".png", ".jpg", ".jpeg")):
+                file_path = os.path.join(root, filename)
 
-            try:
-                # Load image
-                image = cv2.imread(file_path)
-                if image is None:
-                    raise ValueError("Image is empty or corrupted")
+                try:
+                    image = cv2.imread(file_path)
+                    if image is None:
+                        raise ValueError("Image is empty or corrupted")
 
-                # Resize
-                image_resized = cv2.resize(image, target_size)
+                    image_resized = cv2.resize(image, target_size)
+                    image_resized = cv2.cvtColor(image_resized, cv2.COLOR_BGR2RGB)
 
-                # Convert to RGB
-                image_resized = cv2.cvtColor(image_resized, cv2.COLOR_BGR2RGB)
+                    image_normalized = image_resized.astype("float32") / 255.0
 
-                # Normalize pixel values
-                image_normalized = image_resized.astype("float32") / 255.0
+                    if denoise:
+                        image_normalized = cv2.medianBlur((image_normalized * 255).astype("uint8"), 3)
+                        image_normalized = image_normalized.astype("float32") / 255.0
 
-                # Optional denoising
-                if denoise:
-                    image_normalized = cv2.medianBlur((image_normalized * 255).astype("uint8"), 3)
-                    image_normalized = image_normalized.astype("float32") / 255.0
+                    save_path = os.path.join(
+                        output_dir,
+                        f"img_{os.path.splitext(filename)[0]}_cleaned.npz"
+                    )
+                    np.savez_compressed(save_path, image=image_normalized)
+                    results[filename] = save_path
 
-                # Save as compressed .npz
-                save_path = os.path.join(output_dir, f"img_{os.path.splitext(filename)[0]}_cleaned.npz")
-                np.savez_compressed(save_path, image=image_normalized)
-
-                results[filename] = save_path
-
-            except Exception as e:
-                results[filename] = f"ERROR: Could not process {file_path}: {e}"
+                except Exception as e:
+                    results[filename] = f"ERROR: Could not process {file_path}: {e}"
 
     return results
 
@@ -375,8 +374,14 @@ def gather_external_data(folder_name="./raw_data", cleaned_data_folder_path="./c
 
     number_of_files, file_types, total_file_size_in_bytes, total_rows, total_columns = gather_folder_statistics(folder_name)
 
-    if (number_of_files==False and file_types==False and total_file_size_in_bytes==False and total_rows==False and total_columns==False):
-        return False, False, False, False, False, False, 'file_types_not_allowed'
+    print("file_types: ", file_types)
+    print("number_of_files: ", number_of_files)
+    print("total_file_size_in_bytes: ", total_file_size_in_bytes)
+    print("total_rows: ", total_rows)
+    print("total_columns: ", total_columns)
+
+    if number_of_files == 0:
+        return 0, {}, 0, 'null', 'null', {}
 
     #goal = determine_and_encode_goal(goal, number_of_files, file_types, total_file_size_in_bytes, total_rows, total_columns)
 
@@ -412,7 +417,7 @@ def gather_external_data(folder_name="./raw_data", cleaned_data_folder_path="./c
 
     except:
 
-        return False, False, False, False, False, False, 'preprocessing_error'
+        return 0, {}, 0, 'null', 'null', {}
 
 
     master_external_data = build_master_dictionary(
@@ -433,7 +438,7 @@ def log_first_checkpoint(number_of_files, file_types, total_file_size_in_bytes, 
         file_types_dict = file_types
 
     # Database Swap Later
-    append_this_job_data_to_csv(unique_id, number_of_files, file_types[1], total_file_size_in_bytes, total_rows, total_columns, file_path=log_file_path)
+    append_this_job_data_to_csv(unique_id, number_of_files, file_types_dict, total_file_size_in_bytes, total_rows, total_columns, file_path=log_file_path)
     #append_this_job_data_to_csv(unique_id, number_of_files, file_types[1], total_file_size_in_bytes, total_rows, total_columns, file_path='job_data.csv')
     # Start base entry
     first_checkpoint_entry = {
