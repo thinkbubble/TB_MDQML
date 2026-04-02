@@ -4,9 +4,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import classification_report, accuracy_score
 
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow.keras.utils import to_categorical
+from models import build_cnn_model
 
 
 def build_image_label_mapping(raw_data_folder_path):
@@ -69,31 +68,6 @@ def load_cleaned_images_and_labels(cleaned_data_folder_path, image_to_label):
     return np.array(X, dtype="float32"), np.array(y)
 
 
-def build_baseline_cnn(input_shape, num_classes):
-    model = Sequential([
-        Conv2D(32, (3, 3), activation="relu", input_shape=input_shape),
-        MaxPooling2D((2, 2)),
-
-        Conv2D(64, (3, 3), activation="relu"),
-        MaxPooling2D((2, 2)),
-
-        Conv2D(128, (3, 3), activation="relu"),
-        MaxPooling2D((2, 2)),
-
-        Flatten(),
-        Dense(128, activation="relu"),
-        Dropout(0.3),
-        Dense(num_classes, activation="softmax")
-    ])
-
-    model.compile(
-        optimizer="adam",
-        loss="categorical_crossentropy",
-        metrics=["accuracy"]
-    )
-    return model
-
-
 def run_initial_classification_pipeline(raw_data_folder_path, cleaned_data_folder_path):
     image_to_label = build_image_label_mapping(raw_data_folder_path)
     X, y = load_cleaned_images_and_labels(cleaned_data_folder_path, image_to_label)
@@ -111,7 +85,7 @@ def run_initial_classification_pipeline(raw_data_folder_path, cleaned_data_folde
         X, y_cat, test_size=0.2, random_state=42, stratify=y
     )
 
-    model = build_baseline_cnn(X_train.shape[1:], y_train.shape[1])
+    model = build_cnn_model(X_train.shape[1:], y_train.shape[1])
 
     model.fit(
         X_train,
@@ -130,3 +104,6 @@ def run_initial_classification_pipeline(raw_data_folder_path, cleaned_data_folde
     print("\nTest Accuracy:", accuracy)
     print("\nClassification Report:")
     print(classification_report(y_true, y_pred, target_names=encoder.classes_))
+    # Save model
+    model.save("team_amrutha/model_v1.h5")
+    print("\nModel saved successfully!")
