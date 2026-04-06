@@ -1,0 +1,7 @@
+model,accuracy,f1_score,score,dataset
+Logistic Regression,0.9977,0.9976999968949931,99.76999984474966,creditcard_2023.csv
+Random Forest,0.9997,0.9997000000150001,99.97000000075,creditcard_2023.csv
+Logistic Regression,1.0,1.0,100.0,hospital_readmissions.csv
+Random Forest,1.0,1.0,100.0,hospital_readmissions.csv
+Logistic Regression,1.0,1.0,100.0,sentimentdataset.csv
+Random Forest,0.9931972789115646,0.9931386802287459,99.31679795701552,sentimentdataset.csv

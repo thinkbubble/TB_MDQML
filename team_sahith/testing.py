@@ -1,43 +1,86 @@
+import sys
+import types
+import pandas as pd
+import os
+
+sys.modules['pyedflib'] = types.ModuleType('pyedflib')
+sys.modules['pyedflib.highlevel'] = types.ModuleType('highlevel')
 
 from preprocess_data import sensing_and_signal_ingestion
+from load_data import load_preprocessed_csv
+from .main import run_pipeline
+from .visualize import generate_visualizations
+
 
 def main():
 
-    # AFTER YOU INGEST THE SAME DATA ONCE, you can switch to
-    # using load_data.py to load from cleaned_data folder.
-    # ie.
-    # video_data = load_preprocessed_video(./cleaned_data/npz_path)
     my_folder = 'team_sahith'
-    raw_data_folder_path = f'./{my_folder}/raw_data'
-    cleaned_data_folder_path = f'./{my_folder}/cleaned_data'
-    checkpoint_file_path = f'./{my_folder}/job_data.csv'
-    
-    MASTER_UNIQUE_ID, external_data_mapping, internal_data = sensing_and_signal_ingestion(raw_data_folder_path, cleaned_data_folder_path, checkpoint_file_path)
+    raw_data = f'./{my_folder}/raw_data'
+    cleaned_data = f'./{my_folder}/cleaned_data'
+    checkpoint = f'./{my_folder}/job_data.csv'
 
-    print('MASTER_UNIQUE_ID: ', MASTER_UNIQUE_ID)
+    _, mapping, _ = sensing_and_signal_ingestion(raw_data, cleaned_data, checkpoint)
 
-    print('external_data_mapping: ', external_data_mapping)
+    csv_files = mapping.get("csv", {})
+    all_results = []
 
-    print('internal_data: ', internal_data)
+    for file_name, path in csv_files.items():
 
-    # Begin your coding here. Previous things may not work, but
-    # most likely your data is preprocessed correctly at this point.
-    # This is where you will construct your entire pipeline. 
-    # But all the functions you create should be in project_functions.py
-    # or in new_helper.py, revisions made to load_data.py or _1_sensing_and_signals
+        print("\nProcessing:", file_name)
 
-    """
-    
-    Future Steps
+        data = load_preprocessed_csv(path)
 
-    Feature Engineering / Representation
-    Train / Validation / Test Split
-    Model Selection (Use multiple for each goal and dataset - must compare)
-    Training 
-    Evaluation (Metrics) (Log all results - needs to be automated)
-    Iteration / Tuning
-    Deployment / Inference
+        final, results, cm, preview, nulls, corr, feature_importance = run_pipeline(data)
 
-    """
+        if final is None:
+            continue
 
-main()
+        print("Best Model:", final["best_model"])
+        print("Best Score:", round(final["score"], 2))
+
+        print("\nModel Scores:")
+        for r in results:
+            print(f"{r['model']} -> {round(r['score'], 2)}")
+
+        print("\nPreview:\n", preview)
+        print("\nMissing Values:\n", nulls)
+
+        # Save reports
+        report_folder = f"{my_folder}/reports/{file_name.replace('.csv','')}"
+        os.makedirs(report_folder, exist_ok=True)
+
+        preview.to_csv(f"{report_folder}/preview.csv", index=False)
+        nulls.to_csv(f"{report_folder}/missing_values.csv")
+        corr.to_csv(f"{report_folder}/correlation.csv")
+        pd.DataFrame(results).to_csv(f"{report_folder}/model_results.csv", index=False)
+
+        if feature_importance is not None:
+            pd.DataFrame(feature_importance).to_csv(
+                f"{report_folder}/feature_importance.csv", index=False
+            )
+
+        for r in results:
+            r["dataset"] = file_name
+            all_results.append(r)
+
+        generate_visualizations(
+            file_name,
+            my_folder,
+            results,
+            cm,
+            nulls,
+            corr,
+            feature_importance
+        )
+
+    df = pd.DataFrame(all_results)
+
+    if df.empty:
+        print("No results generated")
+        return
+
+    df.to_csv(f"{my_folder}/model_results.csv", index=False)
+
+
+if __name__ == "__main__":
+    main()
