@@ -3,9 +3,9 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import classification_report, accuracy_score
-
 from tensorflow.keras.utils import to_categorical
-from models import build_cnn_model
+
+from models import build_tf_model, get_baseline_cnn_config
 
 
 def build_image_label_mapping(raw_data_folder_path):
@@ -85,7 +85,12 @@ def run_initial_classification_pipeline(raw_data_folder_path, cleaned_data_folde
         X, y_cat, test_size=0.2, random_state=42, stratify=y
     )
 
-    model = build_cnn_model(X_train.shape[1:], y_train.shape[1])
+    model_config = get_baseline_cnn_config()
+    model = build_tf_model(
+        input_shape=X_train.shape[1:],
+        num_classes=y_train.shape[1],
+        model_config=model_config
+    )
 
     model.fit(
         X_train,
@@ -104,6 +109,6 @@ def run_initial_classification_pipeline(raw_data_folder_path, cleaned_data_folde
     print("\nTest Accuracy:", accuracy)
     print("\nClassification Report:")
     print(classification_report(y_true, y_pred, target_names=encoder.classes_))
-    # Save model
+
     model.save("team_amrutha/model_v1.h5")
     print("\nModel saved successfully!")
