@@ -1,6 +1,8 @@
 
 from preprocess_data import sensing_and_signal_ingestion
 
+
+
 def main():
 
     # AFTER YOU INGEST THE SAME DATA ONCE, you can switch to
@@ -40,4 +42,8 @@ def main():
 
     """
 
-main()
+
+
+# Proper entry point (VERY IMPORTANT)
+if __name__ == "__main__":
+    main()
