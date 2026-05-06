@@ -243,3 +243,109 @@ def run_preprocessing_pipeline(config):
     print(f"[done] Scaler params saved to:   {scaler_path}")
     print(f"[done] Dropped columns saved to: {dropped_path}")
     print(f"[done] Final shape: {df.shape[0]} rows × {df.shape[1]} columns.")
+
+
+def add_lag_features(df, lag_periods):
+    """
+    Adds lag features for each numeric indicator column, grouped by country.
+    For each lag n, a new column '{col}_lag_{n}' contains that column's value n years prior.
+    Rows at the start of each country's time series will be NaN (no prior data exists).
+
+    Args:
+        df (pd.DataFrame): Cleaned, normalized indicator DataFrame.
+        lag_periods (list[int]): List of lag offsets in years, e.g. [1, 2, 5].
+
+    Returns:
+        pd.DataFrame: DataFrame with lag feature columns appended.
+    """
+    df = df.copy()
+    df = df.sort_values(["country", "year"]).reset_index(drop=True)
+    indicator_cols = [
+        c for c in df.columns
+        if c not in IDENTIFIER_COLUMNS and pd.api.types.is_numeric_dtype(df[c])
+    ]
+    for col in indicator_cols:
+        for lag in lag_periods:
+            df[f"{col}_lag_{lag}"] = df.groupby("country")[col].shift(lag)
+    total_added = len(indicator_cols) * len(lag_periods)
+    print(
+        f"[lag_features] Added {total_added} lag columns "
+        f"(lags {lag_periods} on {len(indicator_cols)} indicators)."
+    )
+    return df
+
+
+def add_rolling_averages(df, rolling_windows):
+    """
+    Adds rolling mean features for each numeric indicator column, grouped by country.
+    For each window w, a new column '{col}_rolling_mean_{w}' contains the mean of the
+    past w years. Uses min_periods=1 so early rows use however many years are available.
+    Only applied to original indicator columns, not to any existing lag columns.
+
+    Args:
+        df (pd.DataFrame): DataFrame (may already contain lag columns).
+        rolling_windows (list[int]): List of window sizes in years, e.g. [3, 5].
+
+    Returns:
+        pd.DataFrame: DataFrame with rolling mean columns appended.
+    """
+    df = df.copy()
+    df = df.sort_values(["country", "year"]).reset_index(drop=True)
+    indicator_cols = [
+        c for c in df.columns
+        if c not in IDENTIFIER_COLUMNS
+        and pd.api.types.is_numeric_dtype(df[c])
+        and "_lag_" not in c
+        and "_rolling_mean_" not in c
+    ]
+    for col in indicator_cols:
+        for window in rolling_windows:
+            df[f"{col}_rolling_mean_{window}"] = (
+                df.groupby("country")[col]
+                .transform(lambda s, w=window: s.rolling(w, min_periods=1).mean())
+            )
+    total_added = len(indicator_cols) * len(rolling_windows)
+    print(
+        f"[rolling_avg] Added {total_added} rolling mean columns "
+        f"(windows {rolling_windows} on {len(indicator_cols)} indicators)."
+    )
+    return df
+
+
+def run_feature_engineering_pipeline(config):
+    """
+    Orchestrates the feature engineering pipeline.
+    Loads the cleaned CSV, adds lag features and rolling averages, then saves
+    the result as a new CSV in the same cleaned_data directory.
+
+    Steps:
+      1. Load cleaned CSV produced by run_preprocessing_pipeline.
+      2. Add lag features for each configured lag period.
+      3. Add rolling mean features for each configured window size.
+      4. Save the feature-engineered DataFrame to features_output_file_name.
+
+    Args:
+        config (dict): Must contain keys:
+            - cleaned_data_dir (str): Directory containing the cleaned CSV.
+            - output_file_name (str): Filename of the cleaned CSV to load.
+            - features_output_file_name (str): Filename for the output features CSV.
+            - lag_periods (list[int]): Lag offsets in years.
+            - rolling_windows (list[int]): Rolling window sizes in years.
+
+    Returns:
+        None
+    """
+    cleaned_csv_path = os.path.join(config["cleaned_data_dir"], config["output_file_name"])
+    df = load_csv(cleaned_csv_path)
+    print(f"[feature_eng] Loaded cleaned data: {df.shape[0]} rows × {df.shape[1]} columns.")
+
+    df = add_lag_features(df, config["lag_periods"])
+    df = add_rolling_averages(df, config["rolling_windows"])
+
+    features_path = os.path.join(
+        config["cleaned_data_dir"], config["features_output_file_name"]
+    )
+    save_csv(df, features_path)
+
+    print(f"\n[done] Feature-engineered data saved to: {features_path}")
+    print(f"[done] Final shape: {df.shape[0]} rows × {df.shape[1]} columns.")
