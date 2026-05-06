@@ -6,7 +6,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = os.path.dirname(BASE_DIR)
 sys.path.append(PARENT_DIR)
 
-from team_nishanth.project import run_preprocessing_pipeline
+load_dotenv(os.path.join(BASE_DIR, ".env"))
+
+from team_nishanth.project import run_preprocessing_pipeline, run_feature_engineering_pipeline
 
 
 def load_config():
@@ -21,9 +23,10 @@ def load_config():
             - scaler_params_file (str)
             - dropped_columns_file (str)
             - missing_value_threshold (float)
+            - features_output_file_name (str)
+            - lag_periods (list[int])
+            - rolling_windows (list[int])
     """
-    load_dotenv(os.path.join(BASE_DIR, ".env"))
-
     return {
         "raw_data_path": os.getenv("RAW_DATA_PATH"),
         "cleaned_data_dir": os.getenv("CLEANED_DATA_DIR"),
@@ -31,6 +34,9 @@ def load_config():
         "scaler_params_file": os.getenv("SCALER_PARAMS_FILE"),
         "dropped_columns_file": os.getenv("DROPPED_COLUMNS_FILE"),
         "missing_value_threshold": float(os.getenv("MISSING_VALUE_THRESHOLD", 0.5)),
+        "features_output_file_name": os.getenv("FEATURES_OUTPUT_FILE_NAME"),
+        "lag_periods": [int(x) for x in os.getenv("LAG_PERIODS", "1,2,5").split(",")],
+        "rolling_windows": [int(x) for x in os.getenv("ROLLING_WINDOWS", "3,5").split(",")],
     }
 
 
@@ -43,6 +49,7 @@ def validate_config(config):
 
     Raises:
         ValueError: If any required config key is missing or empty.
+        ValueError: If lag_periods or rolling_windows are invalid.
         FileNotFoundError: If the raw data file does not exist.
     """
     required_keys = [
@@ -51,6 +58,7 @@ def validate_config(config):
         "output_file_name",
         "scaler_params_file",
         "dropped_columns_file",
+        "features_output_file_name",
     ]
     for key in required_keys:
         if not config.get(key):
@@ -67,6 +75,14 @@ def validate_config(config):
             f"MISSING_VALUE_THRESHOLD must be between 0 and 1, got: {threshold}"
         )
 
+    lag_periods = config.get("lag_periods", [])
+    if not lag_periods or not all(isinstance(p, int) and p > 0 for p in lag_periods):
+        raise ValueError("LAG_PERIODS must be a comma-separated list of positive integers.")
+
+    rolling_windows = config.get("rolling_windows", [])
+    if not rolling_windows or not all(isinstance(w, int) and w >= 2 for w in rolling_windows):
+        raise ValueError("ROLLING_WINDOWS must be a comma-separated list of integers >= 2.")
+
 
 def main():
     config = load_config()
@@ -78,6 +94,7 @@ def main():
     print(f"  Missing threshold: {config['missing_value_threshold']:.0%}\n")
 
     run_preprocessing_pipeline(config)
+    run_feature_engineering_pipeline(config)
 
 
 if __name__ == "__main__":
